@@ -25,12 +25,12 @@ public class TransactionPrinter implements Printer<Transaction> {
                 String.format(
                         PRINTING_PATTERN,
                         transaction.getTransactionTypeEnum(),
-                        formatDate(transaction.getCreatedDate()),
+                        // formatDate(
+                                transaction.getCreatedDate(),
+                        //),
                         transaction.getAmount()
                 ));
     }
 
-    private String formatDate(OffsetDateTime offsetDateTime) {
-        return offsetDateTime.format(DateTimeFormatter.ofPattern(YYYYMMDD_HH_MM_SS));
-    }
+
 }

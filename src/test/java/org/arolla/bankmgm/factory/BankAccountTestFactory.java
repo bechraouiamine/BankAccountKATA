@@ -39,4 +39,37 @@ public class BankAccountTestFactory {
         );
     }
 
+    public static BankAccount a_bank_account_with_multiple_transaction() {
+        List<Transaction> transactions = new ArrayList<Transaction>();
+        transactions.add(new Transaction(
+                TransactionTypeEnum.DEPOSIT,
+                new BigDecimal(100),
+                FIRST_DEPOSIT,
+                OffsetDateTime.now()));
+
+        transactions.add(new Transaction(
+                TransactionTypeEnum.WITHDRAWAL,
+                new BigDecimal(20),
+                FIRST_DEPOSIT,
+                OffsetDateTime.now()));
+
+        transactions.add(new Transaction(
+                TransactionTypeEnum.WITHDRAWAL,
+                new BigDecimal(35),
+                FIRST_DEPOSIT,
+                OffsetDateTime.now()));
+
+        transactions.add(new Transaction(
+                TransactionTypeEnum.DEPOSIT,
+                new BigDecimal(12),
+                FIRST_DEPOSIT,
+                OffsetDateTime.now()));
+        return new BankAccount(
+                IBAN,
+                new Client(AMINE, BECHRAOUI, OffsetDateTime.now()),
+                transactions
+        );
+    }
+
+
 }

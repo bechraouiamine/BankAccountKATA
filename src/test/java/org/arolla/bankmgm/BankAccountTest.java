@@ -52,7 +52,7 @@ class BankAccountTest {
     @Test
     void should_print_transactions_history() {
         // Given
-        BankAccount bankAccount = BankAccountTestFactory.a_bank_account_with_deposit_transaction_of_ten();
+        BankAccount bankAccount = BankAccountTestFactory.a_bank_account_with_multiple_transaction();
 
         // When
 

@@ -3,9 +3,12 @@ package org.arolla.bankmgm.printers.impl;
 import org.arolla.bankmgm.domain.BankAccount;
 import org.arolla.bankmgm.domain.Client;
 import org.arolla.bankmgm.domain.Transaction;
+import org.arolla.bankmgm.domain.TransactionTypeEnum;
+import org.arolla.bankmgm.printers.BankAccountHistoryLine;
 import org.arolla.bankmgm.printers.Printer;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -24,10 +27,12 @@ public class BankAccountPrinter implements Printer<BankAccount> {
 
     private final Printer<Client> clientPrinter;
     private final Printer<Transaction> transactionPrinter;
+    private final Printer<BankAccountHistoryLine> historyLinePrinterPrinter;
 
     public BankAccountPrinter() {
         clientPrinter = new ClientPrinter();
         transactionPrinter = new TransactionPrinter();
+        historyLinePrinterPrinter = new HistoryLinePrinter();
     }
 
     @Override
@@ -40,6 +45,19 @@ public class BankAccountPrinter implements Printer<BankAccount> {
         System.out.println(String.format(PRINTING_PATTERN, OPERATION, DATE, AMOUNT));
         bankAccount.getTransactions().stream()
                 .forEach(t -> transactionPrinter.print(t));
+
+        Iterator<Transaction> iterator = bankAccount.getTransactions().iterator();
+
+        BigDecimal balance = BigDecimal.ZERO;
+
+        while (iterator.hasNext()) {
+            Transaction transaction = iterator.next();
+            balance = transaction.getTransactionTypeEnum()
+                    .equals(TransactionTypeEnum.DEPOSIT) ?
+                    balance.add(transaction.getAmount()) :
+                    balance.subtract(transaction.getAmount());
+            historyLinePrinterPrinter.print(new BankAccountHistoryLine(transaction, balance));
+        }
 
     }
 
