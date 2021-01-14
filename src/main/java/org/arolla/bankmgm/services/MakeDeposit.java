@@ -14,4 +14,11 @@ public class MakeDeposit extends AbstractMakeTransaction{
     public TransactionTypeEnum getTransactionType() {
         return TransactionTypeEnum.DEPOSIT;
     }
+
+    @Override
+    public boolean isNegativeValuePossible() {
+        return false;
+    }
+
+
 }

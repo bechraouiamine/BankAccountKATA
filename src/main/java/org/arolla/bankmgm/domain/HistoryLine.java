@@ -1,4 +1,4 @@
-package org.arolla.bankmgm.printers;
+package org.arolla.bankmgm.domain;
 
 import org.arolla.bankmgm.domain.Transaction;
 
@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 /**
  * Created by aminebechraoui, on 13/01/2021, in org.arolla.bankmgm.printers
  */
-public class BankAccountHistoryLine {
+public class HistoryLine {
     private Transaction transaction;
     private BigDecimal balance;
 
-    public BankAccountHistoryLine(Transaction transaction, BigDecimal balance) {
+    public HistoryLine(Transaction transaction, BigDecimal balance) {
         this.transaction = transaction;
         this.balance = balance;
     }

@@ -20,10 +20,10 @@ public class ClientPrinter implements Printer<Client> {
 
     @Override
     public void print(Client toPrint) {
-        System.out.println(String.format(PRINTING_PATTERN, NAME, LAST, BIRTH_DATE));
+        System.out.println(String.format(PRINTING_PATTERN + PRINTING_PATTERN+ PRINTING_PATTERN, NAME, LAST, BIRTH_DATE));
         System.out.println(
                         String.format(
-                                PRINTING_PATTERN,
+                                PRINTING_PATTERN + PRINTING_PATTERN+ PRINTING_PATTERN,
                                 toPrint.getName(),
                                 toPrint.getLastName(),
                                 formatDate(toPrint.getBirthDate())

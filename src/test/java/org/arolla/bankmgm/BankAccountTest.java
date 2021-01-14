@@ -5,10 +5,10 @@ import org.arolla.bankmgm.domain.TransactionTypeEnum;
 import org.arolla.bankmgm.factory.BankAccountTestFactory;
 import org.arolla.bankmgm.printers.impl.BankAccountPrinter;
 import org.arolla.bankmgm.printers.Printer;
+import org.arolla.bankmgm.services.GetAccountBalance;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -43,10 +43,22 @@ class BankAccountTest {
         BankAccount bankAccount = BankAccountTestFactory.a_bank_account_with_deposit_transaction_of_ten();
 
         // When
-        BigDecimal balance = bankAccount.getBalance();
+        BigDecimal balance = GetAccountBalance.getAccountBalance(bankAccount);
 
         // Then
         assertEquals(new BigDecimal(10), balance);
+    }
+
+    @Test
+    void should_calculate_bank_account_balance() {
+        // Given
+        BankAccount bankAccount = BankAccountTestFactory.a_bank_account_with_multiple_transaction();
+
+        // When
+        BigDecimal balance = GetAccountBalance.getAccountBalance(bankAccount);
+
+        // Then
+        assertNotNull(balance);
     }
 
     @Test

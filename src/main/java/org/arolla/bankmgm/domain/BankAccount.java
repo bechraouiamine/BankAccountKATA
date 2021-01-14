@@ -18,16 +18,8 @@ public class BankAccount {
         this.transactions = transactions;
     }
 
-    public BigDecimal getBalance() {
-        return transactions.stream().map(t -> t.getAmount()).reduce(BigDecimal.ZERO, (total, element) -> total.add(element));
-    }
-
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public Client getClient() {

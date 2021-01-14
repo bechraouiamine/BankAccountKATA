@@ -13,4 +13,11 @@ public class MakeWithdrawal extends AbstractMakeTransaction {
     public TransactionTypeEnum getTransactionType() {
         return TransactionTypeEnum.WITHDRAWAL;
     }
+
+    @Override
+    public boolean isNegativeValuePossible() {
+        return false;
+    }
+
+
 }
